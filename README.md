@@ -1,5 +1,12 @@
-## Reversal Icon Theme
-A colorful design icon theme for linux desktops
+## Reversal KDE Icon Theme
+A colorful design icon theme for linux desktops, now even more colorful!
+
+This Icon Pack is designed to work with, and only with the KDE desktop environment.
+
+All folders, and certain apps will change their color based on the accent color
+set by the desktop environment. 
+
+If you are not using KDE, the icons will be the default KDE blue (Different from '-blue')
 
 ### Donate
 
