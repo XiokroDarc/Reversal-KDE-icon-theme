@@ -16,7 +16,7 @@ SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 THEME_NAME=Reversal
 COLOR_VARIANTS=(''  '-dark')
-THEME_VARIANTS=('' '-black' '-blue' '-brown' '-cyan' '-green' '-grey' '-lightblue' '-orange' '-pink' '-purple' '-red')
+THEME_VARIANTS=('' '-black' '-blue' '-brown' '-cyan' '-green' '-grey' '-lightblue' '-orange' '-pink' '-purple' '-red' '-yellow')
 
 themes=()
 colors=()
