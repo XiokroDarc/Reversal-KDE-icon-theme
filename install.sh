@@ -14,11 +14,10 @@ fi
 
 SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+
+
 THEME_NAME=Reversal-KDE
 COLOR_VARIANTS=(''  '-dark')
-THEME_VARIANTS=('' '-black' '-blue' '-brown' '-cyan' '-green' '-grey' '-lightblue' '-orange' '-pink' '-purple' '-red' '-yellow')
-
-themes=()
 colors=()
 
 usage() {
@@ -42,10 +41,9 @@ EOF
 install() {
   local dest=${1}
   local name=${2}
-  local theme=${3}
-  local color=${4}
+  local color=${3}
 
-  local THEME_DIR=${dest}/${name}${theme}${color}
+  local THEME_DIR=${dest}/${name}${color}
 
   [[ -d "${THEME_DIR}" ]] && rm -rf "${THEME_DIR}"
 
@@ -56,7 +54,7 @@ install() {
   cp -r "${SRC_DIR}"/src/index.theme                                                         "${THEME_DIR}"
 
   #cd "${THEME_DIR}"
-  sed -i "s/${name}/${name}${theme}${color}/g" "${THEME_DIR}"/index.theme
+  sed -i "s/${name}/${name}${color}/g" "${THEME_DIR}"/index.theme
 
   if [[ ${color} == '' ]]; then
     mkdir -p                                                                                 "${THEME_DIR}"/status
@@ -205,10 +203,9 @@ install() {
 uninstall() {
   local dest=${1}
   local name=${2}
-  local theme=${3}
-  local color=${4}
+  local color=${3}
 
-  local THEME_DIR=${dest}/${name}${theme}${color}
+  local THEME_DIR=${dest}/${name}${color}
 
   [[ -d "${THEME_DIR}" ]] && rm -rf "${THEME_DIR}"
 
@@ -220,10 +217,6 @@ while [[ "$#" -gt 0 ]]; do
     -d|--dest)
       dest="$2"
       mkdir -p "$dest"
-      shift 2
-      ;;
-    -n|--name)
-      name="${2}"
       shift 2
       ;;
     -a|--alternative)
@@ -240,24 +233,6 @@ while [[ "$#" -gt 0 ]]; do
       remove='true'
       shift
       ;;
-    -t|--theme)
-      shift
-      while [[ "$#" -gt 0 ]]; do
-        case "$1" in
-          -*|--*)
-            break
-            ;;
-          all)
-            themes=("${THEME_VARIANTS[@]}")
-            shift
-            ;;
-          *)
-            themes+=("-$1")
-            shift
-            ;;
-        esac
-      done
-      ;;
     -h|--help)
       usage
       exit 0
@@ -270,27 +245,19 @@ while [[ "$#" -gt 0 ]]; do
   esac
 done
 
-if [[ "${#themes[@]}" -eq 0 ]]; then
-  themes=("${THEME_VARIANTS[0]}")
-fi
-
 if [[ "${#colors[@]}" -eq 0 ]]; then
   colors=("${COLOR_VARIANTS[@]}")
 fi
 
 install_theme() {
-  for theme in "${themes[@]}"; do
-    for color in "${colors[@]}"; do
-      install "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${theme}" "${color}"
-    done
+  for color in "${colors[@]}"; do
+      install "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${color}"
   done
 }
 
 uninstall_theme() {
-  for theme in "${THEME_VARIANTS[@]}"; do
-    for color in "${COLOR_VARIANTS[@]}"; do
-      uninstall "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${theme}" "${color}"
-    done
+  for color in "${COLOR_VARIANTS[@]}"; do
+      uninstall "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${color}"
   done
 }
 
