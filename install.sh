@@ -26,8 +26,6 @@ cat << EOF
 
   OPTIONS:
     -d, --dest DIR          Specify destination directory (Default: $DEST_DIR)
-    -n, --name NAME         Specify theme name (Default: $THEME_NAME)
-    -t, --theme VARIANT     Specify theme color variant(s) [default|black|blue|brown|cyan|green|grey|lightblue|orange|pink|purple|red|all] (Default: blue)
     -a, --alternative       Install alternative icons for software center and file-manager
     -b, --bold              Install bolder panel icons version (1.5px size)
 
